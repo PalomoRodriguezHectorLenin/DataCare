@@ -17,4 +17,24 @@ namespace DataCare.Pages
 
         }
     }
+    public class PersonaInfo
+    {
+        public String id;
+        public String nombre;
+        public String apellidoP;
+        public String apellidoM;
+        public String telefono;
+        public String fecha_nacimiento;
+        public String curp;
+        public String genero;
+    }
+
+    public class UsuarioInfo 
+    {
+        public String correo;
+        public String password;
+    }
+
 }
+
+

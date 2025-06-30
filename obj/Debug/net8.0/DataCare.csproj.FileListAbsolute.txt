@@ -40,3 +40,4 @@ C:\Users\lenin\OneDrive\Documentos\Escom\SegundoSemestre\Bases de Datos\Proyecto
 C:\Users\lenin\OneDrive\Documentos\Escom\SegundoSemestre\Bases de Datos\Proyecto\TerceraEntrega\HospitalDataCare\DataCare\DataCare\obj\Debug\net8.0\DataCare.pdb
 C:\Users\lenin\OneDrive\Documentos\Escom\SegundoSemestre\Bases de Datos\Proyecto\TerceraEntrega\HospitalDataCare\DataCare\DataCare\obj\Debug\net8.0\DataCare.genruntimeconfig.cache
 C:\Users\lenin\OneDrive\Documentos\Escom\SegundoSemestre\Bases de Datos\Proyecto\TerceraEntrega\HospitalDataCare\DataCare\DataCare\obj\Debug\net8.0\ref\DataCare.dll
+C:\Users\lenin\OneDrive\Documentos\Escom\SegundoSemestre\Bases de Datos\Proyecto\TerceraEntrega\HospitalDataCare\DataCare\DataCare\obj\Debug\net8.0\DataCare.sourcelink.json

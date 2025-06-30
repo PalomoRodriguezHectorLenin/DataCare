@@ -1,0 +1,100 @@
+﻿@page
+@model DataCare.Pages.RegistroPaciente
+@{
+}
+<div>
+	<h1>Registrate</h1>
+
+	@if (Model.errorMessage.Length > 0)
+	{
+		<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+			<string>@Model.errorMessage</string>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	}
+
+	<form method="POST">
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Nombre</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="Nombre" value="@Model.personaInfo.nombre">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Apellido Paterno</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="ApellidoPaterno" value="@Model.personaInfo.apellidoP">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Apellido Materno</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="ApellidoMaterno" value="@Model.personaInfo.apellidoM">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Telefono</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="Telefono" value="@Model.personaInfo.telefono">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Fecha Nacimiento</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="FechaNacimiento" value="@Model.personaInfo.fecha_nacimiento">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">CURP</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="Curp" value="@Model.personaInfo.curp">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Genero</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="Genero" value="@Model.personaInfo.genero">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Correo</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="Correo" value="@Model.usuarioInfo.correo">
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Contraseña</label>
+			<div class="col-sm-6">
+				<input type="password" class="form-control" name="Password" value="@Model.usuarioInfo.password">
+			</div>
+		</div>
+
+		@if(Model.MessageDB.Length > 0)
+		{
+			<div class="row mb-3">
+				<div class="col-sm-9">
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong>@Model.MessageDB</strong>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+		}
+
+		<div class="row mb-3">
+			<div class="offset-sm-3 col-sm-3 d-grid">
+				<button type="submit" class="btn btn-primary">Registrarse</button>
+			</div>
+			<div class ="col-sm-3 d-grid">
+				<a class="btn btn-outline-primary" href="/" role="button">Regresar</a>
+			</div>
+		</div>
+	</form>
+</div>
