@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Pages\ClientInfo.cs" />
+    <Compile Remove="Pages\PrincipalPaciente.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Index1.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
