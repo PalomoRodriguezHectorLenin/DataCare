@@ -12,8 +12,8 @@ namespace DataCare.Pages
         public String MessageDB = "";
         public String TemMessage = "";
         public String pass = "";
-        int cate;
-        public String temp = "";
+        int categoria;
+        public String rol = "";
         public void OnGet()
         {
             
@@ -36,9 +36,8 @@ namespace DataCare.Pages
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    //String sql = "SELECT u.id_categoria,u.password FROM Usuario u WHERE u.correo = @correo;";
-                    //String sql2 = "SELECT e.rol FROM Empleados e JOIN Usuario u ON e.id_usuario = u.id_usuario WHERE u.id_categoria = 2 AND u.correo ='@correo';";
-                    String sql = "SELECT id_categoria, u.password, e.rol FROM Empleados e JOIN Usuario u ON e.id_usuario = u.id_usuario WHERE u.id_categoria = 2 AND u.correo=@correo;";
+                    
+                    String sql = "SELECT u.id_categoria, u.password, e.rol FROM Empleados e right join Usuario u ON e.id_usuario = u.id_usuario WHERE u.correo=@correo;";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@correo", usuarioInfo.correo);
@@ -47,13 +46,18 @@ namespace DataCare.Pages
                         {
                             while (reader.Read())
                             {
-                                cate = reader.GetInt32(0);
+                                categoria = reader.GetInt32(0);
                                 pass = reader.GetString(1);
-                                temp = reader.GetString(2);
+                                rol = reader.IsDBNull(2) ? null : reader.GetString(2);
 
                                
                             }
                         }
+                    }
+
+                    if(rol == null)
+                    {
+                        rol = "a";
                     }
 
                 }
@@ -64,20 +68,21 @@ namespace DataCare.Pages
                 return;
             }
 
-            if(pass == usuarioInfo.password && temp == "Doctor")
+
+            if (pass == usuarioInfo.password && rol == "Doctor" && categoria == 2)
             {
                 MessageDB = "Contraseña correcta, acceso garantizado para empleado";
                 Response.Redirect("/PrincipalDoctor");
             }
 
-            else if (pass == usuarioInfo.password && temp == "Recepcionista")
+            else if (pass == usuarioInfo.password && rol == "Recepcionista" && categoria == 2)
             {
                 MessageDB = "Contraseña correcta, acceso garantizado para Recepcionista";
                 Response.Redirect("/PrincipalRecepcionista");
 
             }
 
-            else if (pass == usuarioInfo.password && cate == 1)
+            else if (pass == usuarioInfo.password && categoria == 1)
             {
                 MessageDB = "Contraseña correcta, acceso garantizado, bienvenido señor stark";
                 Response.Redirect("/PrincipalPaciente");
