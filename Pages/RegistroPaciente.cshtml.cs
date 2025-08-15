@@ -17,7 +17,69 @@ namespace DataCare.Pages
         public void OnGet()
         {
         }
-        public void OnPost()
+
+        public void OnPost() 
+        {
+            personaInfo.nombre = Request.Form["Nombre"];
+            personaInfo.apellidoP = Request.Form["ApellidoPaterno"];
+            personaInfo.apellidoM = Request.Form["ApellidoMaterno"];
+            personaInfo.telefono = Request.Form["Telefono"];
+            personaInfo.fecha_nacimiento = Request.Form["FechaNacimiento"];
+            personaInfo.curp = Request.Form["Curp"];
+            personaInfo.genero = Request.Form["Genero"];
+            usuarioInfo.correo = Request.Form["Correo"];
+            usuarioInfo.password = Request.Form["Password"];
+
+            if (personaInfo.nombre.Length == 0 || personaInfo.apellidoP.Length == 0 ||
+                personaInfo.telefono.Length == 0 ||
+                personaInfo.fecha_nacimiento.Length == 0 || personaInfo.curp.Length == 0 ||
+                personaInfo.genero.Length == 0 || usuarioInfo.correo.Length == 0 ||
+                usuarioInfo.password.Length == 0)
+            {
+                errorMessage = "Se necesitan todos los campos";
+                return;
+            }
+
+            try
+            {
+                String connectionString = "Data Source=LENIN;Initial Catalog=DATACARE;User ID=sa;Password=n0m3l0;Encrypt=False;TrustServerCertificate=True";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    String sql = "Exec RegistroPersona @nombre, @apellidoP, @apellidoM, @telefono, @fecha_nacimiento, @curp, @genero;" +
+                        "DECLARE @PId INT;" +
+                        "SET @PId = dbo.EncontrarIdPersona(@curp);" +
+                        "Exec RegistroUsuario @PId, @password, @correo;";
+                    using(SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@nombre", personaInfo.nombre);
+                        command.Parameters.AddWithValue("@apellidoP", personaInfo.apellidoP);
+                        command.Parameters.AddWithValue("@apellidoM", personaInfo.apellidoM);
+                        command.Parameters.AddWithValue("@telefono", personaInfo.telefono);
+                        command.Parameters.AddWithValue("@fecha_nacimiento", personaInfo.fecha_nacimiento);
+                        command.Parameters.AddWithValue("@curp", personaInfo.curp);
+                        command.Parameters.AddWithValue("@genero", personaInfo.genero);
+                        command.Parameters.AddWithValue("@password", usuarioInfo.password);
+                        command.Parameters.AddWithValue("@correo", usuarioInfo.correo);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return;
+            }
+
+            personaInfo.nombre = ""; personaInfo.curp = ""; personaInfo.fecha_nacimiento = ""; personaInfo.telefono = "";
+            personaInfo.genero = ""; personaInfo.apellidoM = ""; personaInfo.apellidoP = ""; usuarioInfo.correo = "";
+            usuarioInfo.password = "";
+
+            MessageDB = "Se registro correctamente";
+            Response.Redirect("/Index");
+        }
+        /*public void OnPost()
         {
             personaInfo.nombre = Request.Form["Nombre"];
             personaInfo.apellidoP = Request.Form["ApellidoPaterno"];
@@ -106,7 +168,7 @@ namespace DataCare.Pages
             MessageDB = "Se registro correctamente";
             Response.Redirect("/Index");
 
-        }
+        }*/
 
     }
 }
